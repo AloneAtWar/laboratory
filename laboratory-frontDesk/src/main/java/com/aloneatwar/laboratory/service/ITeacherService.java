@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
  * @Date:   2022-12-23
  * @Version: V1.0
  */
-@Service
+
 public interface ITeacherService extends IService<Teacher> {
 
 }

@@ -1,8 +1,9 @@
 package com.aloneatwar.laboratory.service.impl;
 
 import com.aloneatwar.laboratory.entity.WeeklyReports;
-import org.jeecg.modules.laboratory.mapper.WeeklyReportsMapper;
-import org.jeecg.modules.laboratory.service.IWeeklyReportsService;
+
+import com.aloneatwar.laboratory.mapper.WeeklyReportsMapper;
+import com.aloneatwar.laboratory.service.IWeeklyReportsService;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

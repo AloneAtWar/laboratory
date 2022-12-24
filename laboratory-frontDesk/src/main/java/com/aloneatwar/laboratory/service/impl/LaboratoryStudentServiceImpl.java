@@ -1,8 +1,9 @@
 package com.aloneatwar.laboratory.service.impl;
 
 import com.aloneatwar.laboratory.entity.LaboratoryStudent;
-import org.jeecg.modules.laboratory.mapper.LaboratoryStudentMapper;
-import org.jeecg.modules.laboratory.service.ILaboratoryStudentService;
+
+import com.aloneatwar.laboratory.mapper.LaboratoryStudentMapper;
+import com.aloneatwar.laboratory.service.ILaboratoryStudentService;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
