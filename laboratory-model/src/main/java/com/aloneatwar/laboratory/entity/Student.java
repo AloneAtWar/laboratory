@@ -25,7 +25,8 @@ import java.io.Serializable;
 @ApiModel(value="student对象", description="学生表")
 public class Student implements Serializable {
     private static final long serialVersionUID = 1L;
-
+    public static final String key="STUDENT";
+    public static final String salt ="student6";
 	/**主键*/
 	@TableId(type = IdType.ASSIGN_ID)
     @ApiModelProperty(value = "主键")

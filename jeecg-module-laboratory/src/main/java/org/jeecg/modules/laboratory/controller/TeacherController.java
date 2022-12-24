@@ -3,9 +3,12 @@ package org.jeecg.modules.laboratory.controller;
 import java.util.Arrays;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.system.query.QueryGenerator;
 import com.aloneatwar.laboratory.entity.Teacher;
+import org.jeecg.common.util.PasswordUtil;
 import org.jeecg.modules.laboratory.service.ITeacherService;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -68,6 +71,7 @@ public class TeacherController extends JeecgController<Teacher, ITeacherService>
 	//@RequiresPermissions("laboratory:teacher:add")
 	@PostMapping(value = "/add")
 	public Result<String> add(@RequestBody Teacher teacher) {
+		teacher.setPassword(PasswordUtil.encrypt(teacher.getPassword(), Teacher.key, Teacher.salt));
 		teacherService.save(teacher);
 		return Result.OK("添加成功！");
 	}
@@ -83,6 +87,9 @@ public class TeacherController extends JeecgController<Teacher, ITeacherService>
 	//@RequiresPermissions("laboratory:teacher:edit")
 	@RequestMapping(value = "/edit", method = {RequestMethod.PUT,RequestMethod.POST})
 	public Result<String> edit(@RequestBody Teacher teacher) {
+		if(null!=teacher.getPassword() && !teacher.getPassword().equals("")){
+			teacher.setPassword(PasswordUtil.encrypt(teacher.getPassword(), Teacher.key, Teacher.salt));
+		}
 		teacherService.updateById(teacher);
 		return Result.OK("编辑成功!");
 	}

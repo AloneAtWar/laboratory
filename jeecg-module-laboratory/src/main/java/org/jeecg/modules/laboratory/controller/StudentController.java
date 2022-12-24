@@ -3,9 +3,11 @@ package org.jeecg.modules.laboratory.controller;
 import java.util.Arrays;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.system.query.QueryGenerator;
 import com.aloneatwar.laboratory.entity.Student;
+import org.jeecg.common.util.PasswordUtil;
 import org.jeecg.modules.laboratory.service.IStudentService;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -68,6 +70,7 @@ public class StudentController extends JeecgController<Student, IStudentService>
 	//@RequiresPermissions("laboratory:student:add")
 	@PostMapping(value = "/add")
 	public Result<String> add(@RequestBody Student student) {
+		student.setPassword(PasswordUtil.encrypt(student.getPassword(), Student.key, Student.salt));
 		studentService.save(student);
 		return Result.OK("添加成功！");
 	}
@@ -83,6 +86,9 @@ public class StudentController extends JeecgController<Student, IStudentService>
 	//@RequiresPermissions("laboratory:student:edit")
 	@RequestMapping(value = "/edit", method = {RequestMethod.PUT,RequestMethod.POST})
 	public Result<String> edit(@RequestBody Student student) {
+		if(null!=student.getPassword() && !student.getPassword().equals("")){
+			student.setPassword(PasswordUtil.encrypt(student.getPassword(), Student.key, Student.salt));
+		}
 		studentService.updateById(student);
 		return Result.OK("编辑成功!");
 	}
