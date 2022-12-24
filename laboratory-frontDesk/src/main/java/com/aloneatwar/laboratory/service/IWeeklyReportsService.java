@@ -15,4 +15,5 @@ import java.util.List;
 //select a.id,a.publisher,student.name,a.create_time as studentName from weekly_reports a left join student on student.number=publisher
 public interface IWeeklyReportsService extends IService<WeeklyReports> {
     public List<WeelyReportInfo> findLaboratoryReport(String id);
+    public boolean haveSendLastWeeklyRepost(String id, String number);
 }

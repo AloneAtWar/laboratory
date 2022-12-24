@@ -13,9 +13,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import jakarta.servlet.http.HttpServletRequest;
 import org.jeecg.common.api.vo.Result;
-import org.jeecg.common.system.query.QueryGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,12 +25,9 @@ import java.util.List;
  * @Version: V1.0
  */
 @RestController
-@RequestMapping("student")
+@RequestMapping("/student")
 public class StudentController {
-    @Autowired
-    private IStudentService studentService;
-    @Autowired
-    private ILaboratoryStudentService laboratoryStudentService;
+
     @Autowired
     private ILaboratoryService laboratoryService;
     @Autowired
@@ -59,22 +54,31 @@ public class StudentController {
 
     //  查询学生历史周报按时间排序
     @GetMapping("/getHistoryWeeklyReportsByNumber")
-    public Result<IPage<WeeklyReports>> getHistoryWeeklyReports(String number,
-                                                               @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
-                                                               @RequestParam(name="pageSize", defaultValue="10") Integer pageSize,
-                                                               HttpServletRequest req){
+    public Result<IPage<WeeklyReports>> getHistoryWeeklyReports(@RequestHeader("student-token")String token,
+                                                                @RequestParam(name = "id") String id,
+                                                                @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
+                                                                @RequestParam(name="pageSize", defaultValue="10") Integer pageSize){
+        DecodedJWT jwt = JWTUtil.getJWT(token);
+        String number = jwt.getClaim("number").asString();
         QueryWrapper<WeeklyReports> queryWrapper = new QueryWrapper<>();
-        queryWrapper.like("number",number).orderByAsc("create_time");
+        queryWrapper.eq("number",number)
+                    .eq("id",id)
+                    .orderByAsc("create_time");
         Page<WeeklyReports> page = new Page<WeeklyReports>(pageNo, pageSize);
         IPage<WeeklyReports> pageList = weeklyReportsService.page(page, queryWrapper);
         return Result.OK(pageList);
     }
 
+    //  学生本周是否提交周报
     @GetMapping ("/haveSendWeeklyReport")
-    private boolean haveSendWeeklyReport(@RequestParam(name = "number") String number){
-        List<WeelyReportInfo> list = weeklyReportsService.findLaboratoryReport(number);
-        if ()
+    private Result haveSendWeeklyReport(@RequestHeader("student-token")String token,
+                                         @RequestParam(name = "id") String id){
+        DecodedJWT jwt = JWTUtil.getJWT(token);
+        String number = jwt.getClaim("number").asString();
+        boolean flag = weeklyReportsService.haveSendLastWeeklyRepost(id, number);
+        if (flag)
+            return Result.ok("已提交周报");
+        return Result.error("记得提交周报");
     }
-
 
 }
