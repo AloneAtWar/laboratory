@@ -3,6 +3,8 @@ package org.jeecg.modules.system.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
@@ -48,6 +50,7 @@ import java.util.*;
  * 
  * @Author: Steve @Since： 2019-01-22
  */
+@Api(tags="部门")
 @RestController
 @RequestMapping("/sys/sysDepart")
 @Slf4j
@@ -66,6 +69,7 @@ public class SysDepartController {
 	 *
 	 * @return
 	 */
+	@ApiOperation(value="查询数据 查出我的部门,并以树结构数据格式响应给前端", notes="查询数据 查出我的部门,并以树结构数据格式响应给前端")
 	@RequestMapping(value = "/queryMyDeptTreeList", method = RequestMethod.GET)
 	public Result<List<SysDepartTreeModel>> queryMyDeptTreeList() {
 		Result<List<SysDepartTreeModel>> result = new Result<>();
@@ -96,6 +100,7 @@ public class SysDepartController {
 	 * 
 	 * @return
 	 */
+	@ApiOperation(value="查询数据 查出所有部门,并以树结构数据格式响应给前端", notes="查询数据 查出所有部门,并以树结构数据格式响应给前端")
 	@RequestMapping(value = "/queryTreeList", method = RequestMethod.GET)
 	public Result<List<SysDepartTreeModel>> queryTreeList(@RequestParam(name = "ids", required = false) String ids) {
 		Result<List<SysDepartTreeModel>> result = new Result<>();
@@ -126,6 +131,7 @@ public class SysDepartController {
 	 * @param primaryKey 主键字段（id或者orgCode）
 	 * @return
 	 */
+	@ApiOperation(value="异步查询部门list", notes="异步查询部门list")
 	@RequestMapping(value = "/queryDepartTreeSync", method = RequestMethod.GET)
 	public Result<List<SysDepartTreeModel>> queryDepartTreeSync(@RequestParam(name = "pid", required = false) String parentId,@RequestParam(name = "ids", required = false) String ids, @RequestParam(name = "primaryKey", required = false) String primaryKey) {
 		Result<List<SysDepartTreeModel>> result = new Result<>();
@@ -173,6 +179,7 @@ public class SysDepartController {
 	 * @return
 	 */
 	//@RequiresRoles({"admin"})
+	@ApiOperation(value="添加新数据 添加用户新建的部门对象数据,并保存到数据库", notes="添加新数据 添加用户新建的部门对象数据,并保存到数据库")
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@CacheEvict(value= {CacheConstant.SYS_DEPARTS_CACHE,CacheConstant.SYS_DEPART_IDS_CACHE}, allEntries=true)
 	public Result<SysDepart> add(@RequestBody SysDepart sysDepart, HttpServletRequest request) {
@@ -199,6 +206,7 @@ public class SysDepartController {
 	 * @return
 	 */
 	//@RequiresRoles({"admin"})
+	@ApiOperation(value="编辑部门的部分数据,并保存到数据库", notes="编辑部门的部分数据,并保存到数据库")
 	@RequestMapping(value = "/edit", method = {RequestMethod.PUT,RequestMethod.POST})
 	@CacheEvict(value= {CacheConstant.SYS_DEPARTS_CACHE,CacheConstant.SYS_DEPART_IDS_CACHE}, allEntries=true)
 	public Result<SysDepart> edit(@RequestBody SysDepart sysDepart, HttpServletRequest request) {
@@ -227,6 +235,7 @@ public class SysDepartController {
     * @return
     */
 	//@RequiresRoles({"admin"})
+	 @ApiOperation(value="编通过id删除", notes="通过id删除")
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
 	@CacheEvict(value= {CacheConstant.SYS_DEPARTS_CACHE,CacheConstant.SYS_DEPART_IDS_CACHE}, allEntries=true)
    public Result<SysDepart> delete(@RequestParam(name="id",required=true) String id) {
@@ -255,6 +264,7 @@ public class SysDepartController {
 	 * @return
 	 */
 	//@RequiresRoles({"admin"})
+	@ApiOperation(value="批量删除 根据前端请求的多个ID,对数据库执行删除相关部门数据的操作", notes="批量删除 根据前端请求的多个ID,对数据库执行删除相关部门数据的操作")
 	@RequestMapping(value = "/deleteBatch", method = RequestMethod.DELETE)
 	@CacheEvict(value= {CacheConstant.SYS_DEPARTS_CACHE,CacheConstant.SYS_DEPART_IDS_CACHE}, allEntries=true)
 	public Result<SysDepart> deleteBatch(@RequestParam(name = "ids", required = true) String ids) {
@@ -274,6 +284,7 @@ public class SysDepartController {
 	 * 
 	 * @return
 	 */
+	@ApiOperation(value="添加或编辑页面对该方法发起请求,以树结构形式加载所有部门的名称,方便用户的操作", notes="添加或编辑页面对该方法发起请求,以树结构形式加载所有部门的名称,方便用户的操作")
 	@RequestMapping(value = "/queryIdTree", method = RequestMethod.GET)
 	public Result<List<DepartIdModel>> queryIdTree() {
 //		Result<List<DepartIdModel>> result = new Result<List<DepartIdModel>>();
@@ -456,6 +467,7 @@ public class SysDepartController {
 	 * @return
 	 */
 	@GetMapping("listAll")
+	@ApiOperation("查询所有部门信息")
 	public Result<List<SysDepart>> listAll(@RequestParam(name = "id", required = false) String id) {
 		Result<List<SysDepart>> result = new Result<>();
 		LambdaQueryWrapper<SysDepart> query = new LambdaQueryWrapper<SysDepart>();
@@ -474,6 +486,7 @@ public class SysDepartController {
 	 *
 	 * @return
 	 */
+	@ApiOperation("查询数据 查出所有部门,并以树结构数据格式响应给前端")
 	@RequestMapping(value = "/queryTreeByKeyWord", method = RequestMethod.GET)
 	public Result<Map<String,Object>> queryTreeByKeyWord(@RequestParam(name = "keyWord", required = false) String keyWord) {
 		Result<Map<String,Object>> result = new Result<>();
@@ -502,6 +515,7 @@ public class SysDepartController {
 	 * @return
 	 */
 	@GetMapping("/getDepartName")
+	@ApiOperation("根据部门编码获取部门信息")
 	public Result<SysDepart> getDepartName(@RequestParam(name = "orgCode") String orgCode) {
 		Result<SysDepart> result = new Result<>();
 		LambdaQueryWrapper<SysDepart> query = new LambdaQueryWrapper<>();
@@ -518,6 +532,7 @@ public class SysDepartController {
 	 * @param id
 	 * @return
 	 */
+	@ApiOperation("根据部门ID获取用户信息")
 	@GetMapping("/getUsersByDepartId")
 	public Result<List<SysUser>> getUsersByDepartId(@RequestParam(name = "id") String id) {
 		Result<List<SysUser>> result = new Result<>();

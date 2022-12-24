@@ -1,7 +1,10 @@
 package org.jeecg;
 
+import com.aloneatwar.laboratory.entity.Laboratory;
+import com.aloneatwar.laboratory.entity.LaboratoryStudent;
 import lombok.extern.slf4j.Slf4j;
 import org.jeecg.common.util.oConvertUtils;
+import org.jeecg.modules.laboratory.controller.LaboratoryController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -23,6 +26,9 @@ public class JeecgSystemApplication extends SpringBootServletInitializer {
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        Class<LaboratoryController> laboratoryControllerClass = LaboratoryController.class;
+        Class<Laboratory> laboratoryClass = Laboratory.class;
+        Class<LaboratoryStudent> laboratoryStudentClass = LaboratoryStudent.class;
         return application.sources(JeecgSystemApplication.class);
     }
 

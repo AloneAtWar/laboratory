@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @ApiModel(value="登录对象", description="登录对象")
 public class SysLoginModel {
+    // vo   request
 	@ApiModelProperty(value = "账号")
     private String username;
 	@ApiModelProperty(value = "密码")

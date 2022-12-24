@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jeecg.modules.laboratory.mapper.LaboratoryStudentMapper">
+
+	<delete id="deleteByMainId" parameterType="java.lang.String">
+		DELETE 
+		FROM  laboratory_student 
+		WHERE
+			 laboratory_id = #{mainId} 	</delete>
+	
+	<select id="selectByMainId" parameterType="java.lang.String" resultType="com.aloneatwar.laboratory.entity.LaboratoryStudent">
+		SELECT laboratory_student.*,student.name as `studentName`
+		FROM  laboratory_student
+		LEFT JOIN student
+		ON student.number=laboratory_student.student_number
+		WHERE
+			 laboratory_id = #{mainId} 	</select>
+</mapper>

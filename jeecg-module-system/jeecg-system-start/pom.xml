@@ -21,7 +21,7 @@
         <!-- DEMO 示例模块 -->
         <dependency>
             <groupId>org.jeecgframework.boot</groupId>
-            <artifactId>jeecg-module-demo</artifactId>
+            <artifactId>jeecg-module-laboratory</artifactId>
             <version>${jeecgboot.version}</version>
         </dependency>
     </dependencies>
@@ -31,6 +31,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.7.3</version>
             </plugin>
         </plugins>
     </build>
