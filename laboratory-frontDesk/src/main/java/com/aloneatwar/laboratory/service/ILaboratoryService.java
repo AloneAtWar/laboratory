@@ -49,5 +49,6 @@ public interface ILaboratoryService extends IService<Laboratory> {
 	// 根据学号查询其加入实验室
 	public List<Laboratory> getLabsByStuNumber(String number);
 
+	// 	根据实验室ID查询实验室细节
 	public BaseLaboratory getLabDetail(String id);
 }
