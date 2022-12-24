@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.jeecg.modules.laboratory.mapper.WeeklyReportsMapper">
-
+<mapper namespace="com.aloneatwar.laboratory.mapper.WeeklyReportsMapper">
+    <select id="findLaboratoryReport" resultType="com.aloneatwar.laboratory.vo.response.WeelyReportInfo">
+        select a.id,a.publisher,student.name as publisherName,a.create_time from weekly_reports a left join student on student.number=publisher where a.laboratory_id=#{id} and a.create_time between #{beginTime} and #{endTime}
+    </select>
 </mapper>

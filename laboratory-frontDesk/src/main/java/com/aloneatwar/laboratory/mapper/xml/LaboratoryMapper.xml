@@ -6,6 +6,7 @@
         from laboratory
         where id = {select laboratory_id from laboratory_student where student_number = #{number}}
     </select>
+<mapper namespace="com.aloneatwar.laboratory.mapper.LaboratoryMapper">
 
     <select id="getLabs" resultMap="BaseLaboratory">
         select laboratory.*, teacher.name

@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.system.query.QueryGenerator;
-import com.aloneatwar.laboratory.entity.WeeklyReports;
+import org.jeecg.modules.laboratory.entity.WeeklyReports;
 import org.jeecg.modules.laboratory.service.IWeeklyReportsService;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -24,7 +24,7 @@ import org.jeecg.common.aspect.annotation.AutoLog;
 /**
  * @Description: 周报表
  * @Author: jeecg-boot
- * @Date:   2022-12-23
+ * @Date:   2022-12-24
  * @Version: V1.0
  */
 @Api(tags="周报表")
