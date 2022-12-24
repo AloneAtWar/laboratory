@@ -1,8 +1,13 @@
 package com.aloneatwar.laboratory.mapper;
 
+import com.aloneatwar.laboratory.vo.response.WeelyReportInfo;
 import org.apache.ibatis.annotations.Mapper;
 import com.aloneatwar.laboratory.entity.WeeklyReports;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * @Description: 周报表
@@ -12,5 +17,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 @Mapper
 public interface WeeklyReportsMapper extends BaseMapper<WeeklyReports> {
-
+    List<WeelyReportInfo> findLaboratoryReport(@Param("id") String id, @Param("beginTime") Date beginTime,@Param("endTime") Date endTime);
 }

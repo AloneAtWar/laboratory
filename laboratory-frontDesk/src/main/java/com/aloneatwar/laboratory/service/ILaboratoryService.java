@@ -46,5 +46,4 @@ public interface ILaboratoryService extends IService<Laboratory> {
 	public void delBatchMain (Collection<? extends Serializable> idList);
 
 
-
 }

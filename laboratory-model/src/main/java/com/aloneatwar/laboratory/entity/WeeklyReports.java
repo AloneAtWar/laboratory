@@ -19,7 +19,7 @@ import java.util.Date;
 /**
  * @Description: 周报表
  * @Author: jeecg-boot
- * @Date:   2022-12-23
+ * @Date:   2022-12-24
  * @Version: V1.0
  */
 @Data
@@ -35,8 +35,8 @@ public class WeeklyReports implements Serializable {
     @ApiModelProperty(value = "主键")
     private String id;
 	/**创建人*/
-	@Excel(name = "创建人", width = 15, dictTable = "student", dicText = "name", dicCode = "id")
-	@Dict(dictTable = "student", dicText = "name", dicCode = "id")
+	@Excel(name = "创建人", width = 15, dictTable = "student", dicText = "name", dicCode = "number")
+	@Dict(dictTable = "student", dicText = "name", dicCode = "number")
     @ApiModelProperty(value = "创建人")
     private String publisher;
 	/**实验室*/
