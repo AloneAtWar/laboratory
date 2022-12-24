@@ -1,6 +1,6 @@
 package org.jeecg.modules.laboratory.service.impl;
 
-import org.jeecg.modules.laboratory.entity.WeeklyReports;
+import com.aloneatwar.laboratory.entity.WeeklyReports;
 import org.jeecg.modules.laboratory.mapper.WeeklyReportsMapper;
 import org.jeecg.modules.laboratory.service.IWeeklyReportsService;
 import org.springframework.stereotype.Service;

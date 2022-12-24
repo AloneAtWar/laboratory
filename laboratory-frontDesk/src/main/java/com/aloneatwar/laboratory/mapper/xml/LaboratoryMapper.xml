@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.aloneatwar.laboratory.mapper.LaboratoryMapper">
-    <select id="getLabsByStuNumber" resultMap="com.aloneatwar.laboratory.entity.Laboratory">
+    <select id="getLabsByStuNumber" resultType="com.aloneatwar.laboratory.entity.Laboratory">
         select *
         from laboratory
         where id = {select laboratory_id from laboratory_student where student_number = #{number}}
     </select>
 
-    <select id="getLabs" resultMap="com.aloneatwar.laboratory.vo.response.BaseLaboratory">
+    <select id="getLabs" resultType="com.aloneatwar.laboratory.vo.response.BaseLaboratory">
         select laboratory.*, teacher.name
         from laboratory
         left join teacher
