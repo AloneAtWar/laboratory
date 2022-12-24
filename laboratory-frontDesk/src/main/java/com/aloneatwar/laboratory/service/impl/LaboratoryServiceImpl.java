@@ -6,6 +6,7 @@ import com.aloneatwar.laboratory.entity.LaboratoryStudent;
 import com.aloneatwar.laboratory.mapper.LaboratoryMapper;
 import com.aloneatwar.laboratory.mapper.LaboratoryStudentMapper;
 import com.aloneatwar.laboratory.service.ILaboratoryService;
+import com.aloneatwar.laboratory.vo.response.BaseLaboratory;
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,5 +75,15 @@ public class LaboratoryServiceImpl extends ServiceImpl<LaboratoryMapper, Laborat
 			laboratoryMapper.deleteById(id);
 		}
 	}
-	
+
+	@Override
+	public List<Laboratory> getLabsByStuNumber(String number) {
+		return laboratoryMapper.getLabsByStuNumber(number);
+	}
+
+	@Override
+	public BaseLaboratory getLabDetail(String id) {
+		return laboratoryMapper.getLabDetail(id);
+	}
+
 }

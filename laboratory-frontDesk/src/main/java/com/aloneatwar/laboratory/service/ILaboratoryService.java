@@ -2,6 +2,7 @@ package com.aloneatwar.laboratory.service;
 
 import com.aloneatwar.laboratory.entity.LaboratoryStudent;
 import com.aloneatwar.laboratory.entity.Laboratory;
+import com.aloneatwar.laboratory.vo.response.BaseLaboratory;
 import com.baomidou.mybatisplus.extension.service.IService;
 import java.io.Serializable;
 import java.util.Collection;
@@ -45,6 +46,8 @@ public interface ILaboratoryService extends IService<Laboratory> {
 	 */
 	public void delBatchMain (Collection<? extends Serializable> idList);
 
+	// 根据学号查询其加入实验室
+	public List<Laboratory> getLabsByStuNumber(String number);
 
-
+	public BaseLaboratory getLabDetail(String id);
 }

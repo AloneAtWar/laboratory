@@ -7,6 +7,7 @@ import com.aloneatwar.laboratory.entity.Student;
 import com.aloneatwar.laboratory.service.ILaboratoryService;
 import com.aloneatwar.laboratory.service.ILaboratoryStudentService;
 import com.aloneatwar.laboratory.service.IStudentService;
+import com.aloneatwar.laboratory.vo.response.BaseLaboratory;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.util.PasswordUtil;
@@ -29,10 +30,10 @@ public class LaboratoryController {
     private IStudentService studentService;
 
     @GetMapping("findDetail")
-    public Result<Laboratory> FindDetail(String id) {
-        Result<Laboratory> result = new Result<>();
-        Laboratory laboratory = laboratoryService.getById(id);
-        result.setResult(laboratory);
+    public Result<BaseLaboratory> FindDetail(String id) {
+        Result<BaseLaboratory> result = new Result<>();
+        BaseLaboratory baseLaboratory = laboratoryService.getLabDetail(id);
+        result.setResult(baseLaboratory);
         return result;
     }
 
