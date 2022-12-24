@@ -18,4 +18,5 @@ import java.util.List;
 @Mapper
 public interface WeeklyReportsMapper extends BaseMapper<WeeklyReports> {
     List<WeelyReportInfo> findLaboratoryReport(@Param("id") String id, @Param("beginTime") Date beginTime,@Param("endTime") Date endTime);
+    Integer haveSendLastWeeklyRepost(@Param("id") String id, @Param("number") String number,@Param("beginTime") Date beginTime,@Param("endTime") Date endTime);
 }

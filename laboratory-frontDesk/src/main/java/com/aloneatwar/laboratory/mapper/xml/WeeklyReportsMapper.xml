@@ -4,4 +4,12 @@
     <select id="findLaboratoryReport" resultType="com.aloneatwar.laboratory.vo.response.WeelyReportInfo">
         select a.id,a.publisher,student.name as publisherName,a.create_time from weekly_reports a left join student on student.number=publisher where a.laboratory_id=#{id} and a.create_time between #{beginTime} and #{endTime}
     </select>
+
+    <select id="haveSendLastWeeklyRepost" resultType="Integer">
+        select count(*)
+        from weekly_reports
+        where laboratory_id = #{id}
+        and publisher = #{number}
+        and create_time between #{beginTime} and #{endTime}
+    </select>
 </mapper>
