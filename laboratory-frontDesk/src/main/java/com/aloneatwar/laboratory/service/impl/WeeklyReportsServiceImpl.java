@@ -26,4 +26,5 @@ public class WeeklyReportsServiceImpl extends ServiceImpl<WeeklyReportsMapper, W
         List<WeelyReportInfo> laboratoryReport = baseMapper.findLaboratoryReport(id, WeekUtil.getBeginDayOfWeek(), WeekUtil.getEndDayOfWeek());
         return laboratoryReport;
     }
+
 }

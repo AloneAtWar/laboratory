@@ -1,6 +1,6 @@
 package org.jeecg.modules.laboratory.service;
 
-import org.jeecg.modules.laboratory.entity.WeeklyReports;
+import com.aloneatwar.laboratory.entity.WeeklyReports;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

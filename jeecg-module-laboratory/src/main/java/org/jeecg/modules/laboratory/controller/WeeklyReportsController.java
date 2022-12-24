@@ -3,9 +3,11 @@ package org.jeecg.modules.laboratory.controller;
 import java.util.Arrays;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.aloneatwar.laboratory.entity.WeeklyReports;
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.system.query.QueryGenerator;
-import org.jeecg.modules.laboratory.entity.WeeklyReports;
+import com.aloneatwar.laboratory.entity.WeeklyReports;
 import org.jeecg.modules.laboratory.service.IWeeklyReportsService;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -48,9 +50,9 @@ public class WeeklyReportsController extends JeecgController<WeeklyReports, IWee
 	@ApiOperation(value="周报表-分页列表查询", notes="周报表-分页列表查询")
 	@GetMapping(value = "/list")
 	public Result<IPage<WeeklyReports>> queryPageList(WeeklyReports weeklyReports,
-								   @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
-								   @RequestParam(name="pageSize", defaultValue="10") Integer pageSize,
-								   HttpServletRequest req) {
+													  @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
+													  @RequestParam(name="pageSize", defaultValue="10") Integer pageSize,
+													  HttpServletRequest req) {
 		QueryWrapper<WeeklyReports> queryWrapper = QueryGenerator.initQueryWrapper(weeklyReports, req.getParameterMap());
 		Page<WeeklyReports> page = new Page<WeeklyReports>(pageNo, pageSize);
 		IPage<WeeklyReports> pageList = weeklyReportsService.page(page, queryWrapper);
