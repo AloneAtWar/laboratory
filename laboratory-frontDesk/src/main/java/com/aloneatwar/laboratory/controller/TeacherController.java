@@ -26,6 +26,7 @@ public class TeacherController {
 //    @Autowired
 //    private ILaboratoryStudentService
 
+    //寻找老师管理的实验室
     @GetMapping("/findLaboratory")
     public Result<List<Laboratory>> findLaboratory(@RequestHeader("teacher-token")String token){
         DecodedJWT jwt = JWTUtil.getJWT(token);
@@ -35,5 +36,6 @@ public class TeacherController {
         List<Laboratory> list = laboratoryService.list(wrapper);
         return Result.OK(list);
     }
+
 
 }
