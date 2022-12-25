@@ -17,6 +17,7 @@ import org.jeecg.common.api.vo.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 /**
  * @Description: 学生操作
@@ -44,12 +45,17 @@ public class StudentController {
 
     //  新增或修改周报
     @PostMapping("/saveOrUpdateWeeklyReport")
-    public Result<WeeklyReports> saveOrUpdateWeeklyReport(@RequestBody WeeklyReports weeklyReports){
-        boolean flag = weeklyReportsService.saveOrUpdate(weeklyReports);
+    public Result<WeeklyReports> saveOrUpdateWeeklyReport(@RequestHeader("student-token")String token,
+                                                          @RequestBody WeeklyReports weeklyReports){
+        DecodedJWT jwt = JWTUtil.getJWT(token);
+        String number = jwt.getClaim("number").asString();
+        weeklyReports.setPublisher(number);
+        weeklyReports.setCreateTime(new Date());
+        boolean flag = weeklyReportsService.save(weeklyReports);
         if (flag){
-            return Result.ok("新增或修改周报成功");
+            return Result.ok("新增周报成功");
         }
-        return Result.error("新增或修改周报失败");
+        return Result.error("新增周报失败");
     }
 
     //  查询学生历史周报按时间排序
@@ -61,8 +67,8 @@ public class StudentController {
         DecodedJWT jwt = JWTUtil.getJWT(token);
         String number = jwt.getClaim("number").asString();
         QueryWrapper<WeeklyReports> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("number",number)
-                    .eq("id",id)
+        queryWrapper.eq("publisher",number)
+                    .eq("laboratory_id",id)
                     .orderByAsc("create_time");
         Page<WeeklyReports> page = new Page<WeeklyReports>(pageNo, pageSize);
         IPage<WeeklyReports> pageList = weeklyReportsService.page(page, queryWrapper);

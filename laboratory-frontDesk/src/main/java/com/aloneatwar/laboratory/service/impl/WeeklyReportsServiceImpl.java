@@ -30,6 +30,8 @@ public class WeeklyReportsServiceImpl extends ServiceImpl<WeeklyReportsMapper, W
     @Override
     public boolean haveSendLastWeeklyRepost(String id, String number) {
         Integer count = baseMapper.haveSendLastWeeklyRepost(id, number, WeekUtil.getBeginDayOfWeek(), WeekUtil.getEndDayOfWeek());
+        System.out.println(WeekUtil.getBeginDayOfWeek());
+        System.out.println(WeekUtil.getEndDayOfWeek());
         if (count > 0){
             return true;
         }

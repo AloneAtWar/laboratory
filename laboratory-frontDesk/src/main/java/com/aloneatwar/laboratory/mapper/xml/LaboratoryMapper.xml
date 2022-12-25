@@ -4,10 +4,10 @@
     <select id="getLabsByStuNumber" resultType="com.aloneatwar.laboratory.entity.Laboratory">
         select *
         from laboratory
-        where id = {select laboratory_id from laboratory_student where student_number = #{number}}
+        where id = (select laboratory_id from laboratory_student where student_number = #{number})
     </select>
 
-    <select id="getLabs" resultType="com.aloneatwar.laboratory.vo.response.BaseLaboratory">
+    <select id="getLabDetail" resultType="com.aloneatwar.laboratory.vo.response.BaseLaboratory">
         select laboratory.*, teacher.name
         from laboratory
         left join teacher
