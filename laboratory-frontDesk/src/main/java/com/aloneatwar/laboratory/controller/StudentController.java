@@ -43,8 +43,8 @@ public class StudentController {
         return Result.ok(list);
     }
 
-    //  新增或修改周报
-    @PostMapping("/saveOrUpdateWeeklyReport")
+    //  新增周报
+    @PostMapping("/saveWeeklyReport")
     public Result<WeeklyReports> saveOrUpdateWeeklyReport(@RequestHeader("student-token")String token,
                                                           @RequestBody WeeklyReports weeklyReports){
         DecodedJWT jwt = JWTUtil.getJWT(token);
